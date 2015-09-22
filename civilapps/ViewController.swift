@@ -14,11 +14,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +21,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func login(sender: AnyObject) {
+        self.performSegueWithIdentifier("segueMenu", sender: self)
+    }
+    
+}
 
+@objc(SegueMenu)
+class SegueMenu: UIStoryboardSegue {
+    override func perform () {
+        let src = self.sourceViewController as UIViewController
+        let dst = self.destinationViewController as UIViewController
+        src.presentViewController(dst, animated: true, completion: nil)
+    }
 }
 
